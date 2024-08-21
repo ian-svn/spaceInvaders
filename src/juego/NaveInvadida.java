@@ -14,12 +14,20 @@ public class NaveInvadida extends Nave {
     private boolean aPressed = false;
     private boolean dPressed = false;
 
-    public NaveInvadida(Integer EspANCHO, Integer EspALTO) {
-        super(EspANCHO, EspALTO);
-        x = 350 - ANCHO;
-        y = EspALTO - 50 - ALTO; // Ajustar posición inicial de la nave
+    public NaveInvadida(Integer EspALTO, Integer EspANCHO) {
+    	this.EspALTO = EspALTO;
+    	this.EspANCHO = EspANCHO;
+        x = EspANCHO / 2 - ANCHO / 2; // Centrar la nave horizontalmente al inicio
+        y = EspALTO - 50 - ALTO; // Ajustar posición inicial de la nave verticalmente
     }
 
+    public NaveInvadida(Integer x,Integer y, Integer EspANCHO, Integer EspALTO) {
+		this.x = x;
+		this.y = y;
+		this.EspANCHO = EspANCHO;
+		this.EspALTO = EspALTO;
+	}
+    
     @Override
     public void paint(Graphics g) {
         ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveDefensora1.png"));
@@ -28,14 +36,14 @@ public class NaveInvadida extends Nave {
 
     @Override
     public void moverse() {
-        if (dPressed) {
-            if (x + ANCHO < EspANCHO) { 
-                x += XVEL;
-            }
-        }
         if (aPressed) {
             if (x > 0) {
                 x -= XVEL;
+            }
+        }
+        if (dPressed) {
+            if (x < EspANCHO-ANCHO-15) { 
+                x += XVEL;
             }
         }
     }
@@ -63,6 +71,17 @@ public class NaveInvadida extends Nave {
     public Integer getVidas() {
         return vidas;
     }
+    
+    public Integer getAncho() {
+    	return ANCHO;
+    }
+    public Integer getAlto() {
+    	return ALTO;
+    }
+
+	public void setPosicionInicial(int i, int j) {
+		
+	}
     
     
     

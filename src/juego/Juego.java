@@ -23,8 +23,8 @@ public class Juego extends JPanel implements ActionListener {
     private NaveInvadida nave;
 
     public Juego() {
-        nave = new NaveInvadida(ALTO, ANCHO);
-        
+    	nave = new NaveInvadida(ALTO, ANCHO);
+
         addKeyListener(new KeyListener() {
 
 			@Override
