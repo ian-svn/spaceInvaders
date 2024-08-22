@@ -2,6 +2,9 @@ package juego;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
@@ -9,17 +12,20 @@ public class NaveInvadida extends Nave {
 
     private final Integer vidas = 3;
     private final Integer XVEL = 5;
-
+    
     private boolean aPressed = false;
     private boolean dPressed = false;
     private boolean wPressed = false;
+    private Integer temp = 10;
+    
+    List<DisparoNaveInvadida> disparos = new ArrayList<>();
 
     public NaveInvadida(Integer EspANCHO, Integer EspALTO) {
     	this.EspALTO = EspALTO;
     	this.EspANCHO = EspANCHO;
         x = EspANCHO / 2 - ANCHO/2;
         y = EspALTO-ALTO-ALTO/2-ALTO/8;
-        System.out.println("Espalto: " +EspALTO+" eAnc:" + EspANCHO +" Anc:" + ANCHO +" AL:" + ALTO +" Y:" + y  + " X:" + x );
+        //System.out.println("Espalto: " +EspALTO+" eAnc:" + EspANCHO +" Anc:" + ANCHO +" AL:" + ALTO +" Y:" + y  + " X:" + x );
     }
 
     public NaveInvadida(Integer x,Integer y, Integer EspANCHO, Integer EspALTO) {
@@ -33,10 +39,16 @@ public class NaveInvadida extends Nave {
     public void paint(Graphics g) {
         ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveDefensora.png"));
         g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);
+        for(int x=0;x<disparos.size();x++) {
+        	disparos.get(x).paint(g);
+        }
     }
 
     @Override
     public void moverse() {
+    	if(temp>0) {
+        	temp-=1;
+    	}
         if (aPressed) {
             if (x > 10) {
                 x -= XVEL;
@@ -48,15 +60,16 @@ public class NaveInvadida extends Nave {
             }
         }
         if (wPressed) {
-            if (x < EspANCHO-ANCHO-25) { 
-                x += XVEL;
+            if (temp==0) {
+            	DisparoNaveInvadida disparo = new DisparoNaveInvadida(x,y,EspANCHO,EspALTO,ANCHO,ALTO);
+            	disparos.add(disparo);
+            	temp=10;
             }
         }
     }
 
     @Override
     public void disparar() {
-    	
     }
 
     @Override
@@ -76,7 +89,9 @@ public class NaveInvadida extends Nave {
         if (e.getKeyCode() == KeyEvent.VK_W) wPressed = false;
     }
     
-    
+    public Rectangle2D getBoundsNaveInvadida() {
+        return new Rectangle2D.Double(x, y, ANCHO, ALTO);
+    }
 
     public Integer getVidas() {
         return vidas;
@@ -87,6 +102,13 @@ public class NaveInvadida extends Nave {
     }
     public Integer getAlto() {
     	return ALTO;
+    }
+    
+    public Integer getEspAncho() {
+    	return EspANCHO;
+    }
+    public Integer getEspAlto() {
+    	return EspALTO;
     }
 
 	public void setPosicionInicial(int i, int j) {

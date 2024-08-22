@@ -5,12 +5,15 @@ import java.awt.geom.Rectangle2D;
 
 public abstract class Disparo {
 	
-	final protected Integer ANCHO=2;
-	final protected Integer ALTO=5;
+	final protected Integer ANCHO=10;
+	final protected Integer ALTO=30;
 	final private Integer VEL_Y=4;
 	protected Integer x;
 	protected Integer y;
-	
+	protected Integer EspANCHO; 
+	protected Integer EspALTO;
+	protected Integer ancho_nave;
+	protected Integer alto_nave;
 	
 	public Disparo() {
 		
@@ -18,6 +21,14 @@ public abstract class Disparo {
 	public Disparo(Integer x,Integer y) {
 		this.x = x;
 		this.y = y;
+	}
+	public Disparo(Integer x,Integer y, Integer EspANCHO, Integer EspALTO,Integer ancho_nave, Integer alto_nave) {
+		this.x = x;
+		this.y = y;	
+		this.EspANCHO = EspANCHO; 
+		this.EspALTO = EspALTO; 
+		this.ancho_nave = ancho_nave;
+		this.alto_nave = alto_nave;
 	}
 	
 	public abstract void moverse();
