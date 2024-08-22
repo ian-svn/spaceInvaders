@@ -2,12 +2,9 @@ package juego;
 
 import java.awt.Graphics;
 
-import javax.swing.ImageIcon;
-
 public abstract class Nave {
-	final protected Integer ANCHO = 40;
-	final protected Integer ALTO = 40;
-	
+	final protected Integer ANCHO = 76;
+	final protected Integer ALTO = 80;
 	Integer EspANCHO;
 	Integer EspALTO;
 	

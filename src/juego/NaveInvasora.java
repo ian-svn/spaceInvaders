@@ -19,11 +19,7 @@ public class NaveInvasora extends Nave{
 	
 	@Override
 	public void moverse() {
-		
-		
-		
 		Rectangle2D DisparoNaveInvadidaHitbox = new Rectangle2D.Double(x, y, ANCHO, ALTO);
-		
     }
 	@Override
 	public void disparar() {

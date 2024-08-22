@@ -3,8 +3,6 @@ package juego;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.ImageIcon;
-
 public abstract class Disparo {
 	
 	final protected Integer ANCHO=2;

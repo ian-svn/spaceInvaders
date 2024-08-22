@@ -1,7 +1,6 @@
 package juego;
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
