@@ -91,7 +91,7 @@ public class Juego extends JPanel implements ActionListener {
         		}
             }
         } else if(nivel==2&&aux==0) {
-        	System.out.println("gola");
+        	System.out.println("Ganaste!");
 
             g.drawString("Ganaste!",250,350);
         }
