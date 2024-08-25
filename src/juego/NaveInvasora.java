@@ -8,34 +8,45 @@ import javax.swing.ImageIcon;
 public class NaveInvasora extends Nave{
 	
 	Integer temp=100;
-	Boolean ladoAvanzar=true;
-	//Integer EspCambioX1;
-	//Integer EspCambioX2;
+
+	Integer tempBasta=1000;
+	Boolean vivo=true;
+	Juego juego;
+	Boolean aux;
 	
-	public NaveInvasora(Integer x, Integer y, Integer EspANCHO, Integer EspALTO) {
+	public NaveInvasora(Integer x, Integer y, Integer EspANCHO, Integer EspALTO, Juego juego) {
 		super(x, y, EspANCHO, EspALTO);
+		this.juego = juego;
 	}
 	
 	@Override
 	public void paint(Graphics g) {
-		ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveenemiga.png"));
-		g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);
-		temp--;
+		if(vivo) {
+			ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveenemiga.png"));
+			g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);
+			temp--;
+		}
 	}
 	
 	@Override
 	public void moverse() {
-		if(x<EspANCHO) {
-			ladoAvanzar=true;
+		if(vivo&&x>=EspANCHO-ANCHO-ANCHO/4&&juego.getMovimientoH()) {
+			juego.setMovimientoH(false);
+			juego.setMovimientoV(true);
 		} 
-		if(temp<=0&&ladoAvanzar) {
-			x+=10;
-			reset();
-		} else if(temp<=0&&!ladoAvanzar) {
-			x-=10;
+		if(vivo&&x<=0&&!juego.getMovimientoH()) {
+			juego.setMovimientoH(true);
+			juego.setMovimientoV(true);
+		}
+		if(vivo&&juego.getMovimientoH()) {
+			x+=5;
+		} else if(vivo&&!juego.getMovimientoH()) {
+			x-=5;
+		}
+		if(temp<=0){
 			reset();
 		}
-		
+		//System.out.println("espAncho: " + (EspANCHO-ANCHO-ANCHO/4) + "temp: "+temp+" moveH: "+ juego.getMovimientoH() +" moveV: " + juego.getMovimientoV() + " x: " + x);
     }
 	//Rectangle2D DisparoNaveInvadidaHitbox = new Rectangle2D.Double(x, y, ANCHO, ALTO);
 	@Override
@@ -44,8 +55,7 @@ public class NaveInvasora extends Nave{
 	}
 	@Override
 	public void destruirse() {
-		
-    	System.out.println("choque");
+		vivo=false;
 	}
 	
 	public void reset() {
@@ -54,7 +64,7 @@ public class NaveInvasora extends Nave{
 	
 
     public Rectangle2D getBoundsNaveInvasora() {
-        return new Rectangle2D.Double(x, y, 13, 70);
+        return new Rectangle2D.Double(x, y, ANCHO, ALTO);
     }
     
     public Boolean getVivo() {
@@ -62,5 +72,18 @@ public class NaveInvasora extends Nave{
 	}
 	public void setVivo(Boolean vivo) {
 		this.vivo = vivo;
+	}
+	public Integer getY() {
+		return y;
+	}
+	public void setY(Integer y) {
+		this.y = y;
+	}
+	
+	public Integer getX() {
+		return x;
+	}
+	public void setX(Integer x) {
+		this.x = x;
 	}
 }

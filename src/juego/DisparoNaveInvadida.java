@@ -1,10 +1,13 @@
 package juego;
 
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 
 public class DisparoNaveInvadida extends Disparo{
+	
+	Boolean desaparece=false;
 	
 	public DisparoNaveInvadida(Integer x,Integer y, Integer EspANCHO, Integer EspALTO, Integer ancho_nave, Integer alto_nave) {
 		super(x,y,EspANCHO,EspALTO,ancho_nave,alto_nave);
@@ -12,18 +15,36 @@ public class DisparoNaveInvadida extends Disparo{
 	
 	@Override
 	public void paint(Graphics g) {
-		ImageIcon disparo = new ImageIcon(getClass().getResource("/imagenes/disparoDefensor.png"));
-		g.drawImage(disparo.getImage(), x+ancho_nave/2-4, y-alto_nave/8, ANCHO, ALTO, null);
-		moverse();
+		if(!desaparece) {
+			ImageIcon disparo = new ImageIcon(getClass().getResource("/imagenes/disparoDefensor.png"));
+			g.drawImage(disparo.getImage(), x+ancho_nave/2-4, y-alto_nave/8, ANCHO, ALTO, null);
+			moverse();
+		}
 	}
 	
 
 	@Override
 	public void moverse() {
-		if(y<=EspALTO) {
-			y-=10;
+		if(y>0&&y<=EspALTO&&!desaparece) {
+			y-=8;
+		} else if(y<0){
+			desaparece=true;
 		}
 	}
 	
+	public void choque(NaveInvasora nave) {
+		if(nave.getVivo()&&!desaparece) {
+			Rectangle2D disparoReact = new Rectangle2D.Double(x+ancho_nave/2-4, y-alto_nave/8, ANCHO, ALTO);
+			Rectangle2D naveReact = nave.getBoundsNaveInvasora();
+			
+			if(disparoReact.intersects(naveReact)) {
+				nave.destruirse();
+				desaparece=true;
+			}
+		}
+	}
 	
+	public Rectangle2D getBoundsDisparoND() {
+		return new Rectangle2D.Double(x+ancho_nave/2-4, y-alto_nave/8, ANCHO, ALTO);
+    }
 }

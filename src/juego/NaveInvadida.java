@@ -16,7 +16,7 @@ public class NaveInvadida extends Nave {
     private boolean aPressed = false;
     private boolean dPressed = false;
     private boolean wPressed = false;
-    private Integer temp = 10;
+    private Integer temp = 20;
     
     List<DisparoNaveInvadida> disparos = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class NaveInvadida extends Nave {
             if (temp==0) {
             	DisparoNaveInvadida disparo = new DisparoNaveInvadida(x,y,EspANCHO,EspALTO,ANCHO,ALTO);
             	disparos.add(disparo);
-            	temp=10;
+            	temp=20;
             }
         }
     }
@@ -111,6 +111,10 @@ public class NaveInvadida extends Nave {
     	return EspALTO;
     }
 
+    public List<DisparoNaveInvadida> getDisparos() {
+    	return disparos;
+    }
+    
 	public void setPosicionInicial(int i, int j) {
 		
 	}
