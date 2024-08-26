@@ -7,7 +7,7 @@ public abstract class Disparo {
 	
 	final protected Integer ANCHO=10;
 	final protected Integer ALTO=30;
-	final private Integer VEL_Y=4;
+	public Integer velY=8;
 	protected Integer x;
 	protected Integer y;
 	protected Integer EspANCHO; 

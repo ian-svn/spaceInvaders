@@ -35,6 +35,7 @@ public class Juego extends JPanel implements ActionListener {
     
     
     private List<NaveInvasora> enemigos = new ArrayList<>();
+    private List<NaveInvasoraDisparadora> enemigosD = new ArrayList<>();
 
     public Juego() {
         nave = new NaveInvadida(ANCHO, ALTO);
@@ -84,16 +85,78 @@ public class Juego extends JPanel implements ActionListener {
              	    enemigos.add(new NaveInvasora(posX,120,ANCHO, ALTO,this));
         		} else if(x>7*3&&x<=7*4) {
         			posX+=66*(x-7*3);
-             	    enemigos.add(new NaveInvasora(posX,160,ANCHO, ALTO,this));
+        			if((x-7*2)==2|(x-7*2)==6) {
+        			    enemigos.add(new NaveInvasoraDisparadora(posX,160,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,160,ANCHO, ALTO,this));	
+        			}
         		} else if(x>7*4&&x<=7*5) {
         			posX+=66*(x-7*4);
              	    enemigos.add(new NaveInvasora(posX,200,ANCHO, ALTO,this));
         		}
             }
         } else if(nivel==2&&aux==0) {
-        	System.out.println("Ganaste!");
-
-            g.drawString("Ganaste!",250,350);
+        	
+        	for(int x = 0;x<=35;x++) {
+        		int posX=1;
+        		if(x>0&&x<=7) {
+        			posX+=66*x;
+             	    enemigos.add(new NaveInvasora(posX,40,ANCHO, ALTO,this));
+        		} else if(x>7&&x<=7*2) {
+        			posX+=66*(x-7);
+                 	    enemigos.add(new NaveInvasora(posX,80,ANCHO, ALTO,this));	
+        		} else if(x>7*2&&x<=7*3) {
+        			posX+=66*(x-7*2);
+        			if((x-7*2)==2|(x-7*2)==6) {
+        			    enemigos.add(new NaveInvasoraDisparadora(posX,120,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,120,ANCHO, ALTO,this));	
+        			}
+        		} else if(x>7*3&&x<=7*4) {
+        			posX+=66*(x-7*3);
+        			if((x-7*3)==2|(x-7*3)==4) {
+        			    enemigos.add(new NaveInvasoraDisparadora(posX,160,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,160,ANCHO, ALTO,this));	
+        			}
+             	} else if(x>7*4&&x<=7*5) {
+        			posX+=66*(x-7*4);
+             	    enemigos.add(new NaveInvasora(posX,200,ANCHO, ALTO,this));
+        		}
+            }
+        } else if(nivel==3&&aux==0) {
+        	
+        	for(int x = 0;x<=35;x++) {
+        		int posX=1;
+        		if(x>0&&x<=7) {
+        			posX+=66*x;
+        			if((x-7)==4||(x-7)==5) {
+        			    enemigos.add(new NaveInvasoraDisparadora(posX,40,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,40,ANCHO, ALTO,this));	
+        			}
+        		} else if(x>7&&x<=7*2) {
+        			posX+=66*(x-7);
+             	    enemigos.add(new NaveInvasora(posX,80,ANCHO, ALTO,this));
+        		} else if(x>7*2&&x<=7*3) {
+        			posX+=66*(x-7*2);
+        			if((x-7*2)==1||(x-7*2)==7) {
+        			    enemigos.add(new NaveInvasoraDisparadora(posX,120,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,120,ANCHO, ALTO,this));	
+        			}
+        		} else if(x>7*3&&x<=7*4) {
+        			posX+=66*(x-7*3);
+        			if((x-7*3)==1||(x-7*3)==3||(x-7*3)==5) {
+        			    enemigos.add(new NaveInvasoraDisparadora(posX,160,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,160,ANCHO, ALTO,this));	
+        			}
+             	} else if(x>7*4&&x<=7*5) {
+        			posX+=66*(x-7*4);
+             	    enemigos.add(new NaveInvasora(posX,200,ANCHO, ALTO,this));
+        		}
+            }
         }
 
         nave.paint(g);
@@ -102,6 +165,9 @@ public class Juego extends JPanel implements ActionListener {
         
         for(int x = 0;x<enemigos.size();x++) {
      	    enemigos.get(x).paint(g);
+        }
+        for(int x = 0;x<enemigosD.size();x++) {
+     	    enemigosD.get(x).paint(g);
         }
         
 
@@ -117,12 +183,20 @@ public class Juego extends JPanel implements ActionListener {
 	 			disparos.get(x).choque(enemigos.get(y));
 			}
 		}
+	 	for(int x = 0;x<enemigosD.size();x++) {
+		 	List<DisparoNaveInvasora> disparosInvasores = enemigosD.get(x).getDisparos();
+	 		for(int y = 0 ; y < disparosInvasores.size();y++) {
+	 			disparos.get(y).choque(enemigos.get(x));
+			}
+		}
+    	
 	
     	for(int x = 0;x<enemigos.size();x++) {
     		if(MovimientoVertical) {
     			enemigos.get(x).setY(enemigos.get(x).getY()+10);
     		}
     		enemigos.get(x).moverse();
+            nave.choqueNaves(enemigos.get(x));
     	}
     	
 		MovimientoVertical=false;
@@ -137,7 +211,6 @@ public class Juego extends JPanel implements ActionListener {
         frame.setResizable(false);
         frame.setFocusable(true);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
         juego.requestFocusInWindow();
@@ -165,9 +238,16 @@ public class Juego extends JPanel implements ActionListener {
     	if(count==0) {
     		nivel++;
     		aux=0;
+    		enemigos.clear();
+    		enemigosD.clear();
+        	nave.getDisparos().clear();
+        	nave.reaparecer();
     	}
     }
-    
+    public NaveInvadida getNaveInvadida(){
+    	return nave;
+    }
+    /*
     private void drawTextWithOutline(Graphics g, String text, int x, int y, Color outlineColor, Color textColor) throws Exception {
     	InputStream is = getClass().getResourceAsStream("/fuentes/NewAmsterdam-Regular.ttf");
         Font win = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(24f);
@@ -187,5 +267,5 @@ public class Juego extends JPanel implements ActionListener {
         g.drawString(text, x, y);
         g.setColor(originalColor);
     }
-
+	*/
 }

@@ -26,7 +26,7 @@ public class DisparoNaveInvadida extends Disparo{
 	@Override
 	public void moverse() {
 		if(y>0&&y<=EspALTO&&!desaparece) {
-			y-=8;
+			y-=velY;
 		} else if(y<0){
 			desaparece=true;
 		}

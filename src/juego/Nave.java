@@ -11,7 +11,7 @@ public abstract class Nave {
 	Integer x;
 	Integer y;
 	
-	Boolean vivo;
+	Boolean vivo=true;
 
 	public Nave() {
 		
@@ -30,8 +30,6 @@ public abstract class Nave {
 	}
 
 	public abstract void moverse();
-
-	public abstract void disparar();
 
 	public abstract void destruirse();
 	
