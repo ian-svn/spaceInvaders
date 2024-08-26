@@ -26,6 +26,9 @@ public class NaveInvasora extends Nave{
 			g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);
 			temp--;
 		}
+		if(x>EspANCHO||y>EspALTO) {
+			vivo=false;
+		}
 	}
 	
 	@Override

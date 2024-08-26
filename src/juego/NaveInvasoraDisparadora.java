@@ -4,12 +4,16 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
 public class NaveInvasoraDisparadora extends NaveInvasora{
 	
-	int tempDisparo=80;
+	Random random = new Random();
+    int min = 80;
+    int max = 200;
+    int tempDisparo=random.nextInt(max - min + 1) + min;
     List<DisparoNaveInvasora> disparos = new ArrayList<>();
 	
 	public NaveInvasoraDisparadora(Integer x, Integer y, Integer EspANCHO, Integer EspALTO, Juego juego) {
@@ -27,6 +31,10 @@ public class NaveInvasoraDisparadora extends NaveInvasora{
 		}
 		for(int x=0;x<disparos.size();x++) {
 			disparos.get(x).paint(g);
+		}
+
+		if(x>EspANCHO||y>EspALTO) {
+			vivo=false;
 		}
 		choque();
 	}
@@ -51,7 +59,6 @@ public class NaveInvasoraDisparadora extends NaveInvasora{
 		}
 		if(vivo&&tempDisparo<=0) {
 			disparar();
-			tempDisparo=80;
 		}
 		//System.out.println("espAncho: " + (EspANCHO-ANCHO-ANCHO/4) + "temp: "+temp+" moveH: "+ juego.getMovimientoH() +" moveV: " + juego.getMovimientoV() + " x: " + x);
     }
@@ -59,7 +66,7 @@ public class NaveInvasoraDisparadora extends NaveInvasora{
 	private void disparar() {
 		DisparoNaveInvasora disparo = new DisparoNaveInvasora(x,y,EspANCHO,EspALTO,ANCHO,ALTO);
     	disparos.add(disparo);
-		tempDisparo=50;
+		tempDisparo=random.nextInt(max - min + 1) + min;
 	}
 	@Override
 	public void destruirse() {

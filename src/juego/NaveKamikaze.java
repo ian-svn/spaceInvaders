@@ -24,23 +24,31 @@ public class NaveKamikaze extends NaveInvasora{
 	@Override
 	public void paint(Graphics g) {
 		if(vivo) {
-			ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveDefensora1.png"));
+			ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/navekamikaze.png"));
 			g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);
 			temp--;
-			if(temp<=0&&aux==2) {
+			if(temp<=0&&aux==2&&vivo) {
 				try {
 					if(recorreY<movimientosY.size()&&juego.getNaveInvadida().getVivo()) {
 						x+=movimientosX.get(recorreX);
 						recorreX++;
+						x+=movimientosX.get(recorreX);
+						recorreX++;
 					}
-				} catch(IndexOutOfBoundsException e) {y++;}
+				} catch(IndexOutOfBoundsException e) {y+=2;}
 				try {
 					if(recorreY<movimientosY.size()&&juego.getNaveInvadida().getVivo()) {
 						y+=movimientosY.get(recorreY);
 						recorreY++;
+						y+=movimientosY.get(recorreY);
+						recorreY++;
 					}
-				} catch(IndexOutOfBoundsException e) {y++;}	
+				} catch(IndexOutOfBoundsException e) {y+=2;}	
 			}
+		}
+		if(x>EspANCHO||y>EspALTO) {
+			vivo=false;
+			System.out.println("vivo: " + vivo);
 		}
 	}
 	
@@ -91,6 +99,8 @@ public class NaveKamikaze extends NaveInvasora{
 		}
 		//System.out.println("espAncho: " + (EspANCHO-ANCHO-ANCHO/4) + "temp: "+temp+" moveH: "+ juego.getMovimientoH() +" moveV: " + juego.getMovimientoV() + " x: " + x);
     }
+	
+	
 	
 	public void reset() {
 		temp=100;

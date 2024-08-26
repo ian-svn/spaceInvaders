@@ -17,7 +17,7 @@ public class NaveInvadida extends Nave {
     private boolean dPressed = false;
     private boolean wPressed = false;
     private Integer temp=10;
-    private Integer tiempoEntreDisparo=1;
+    private Integer tiempoEntreDisparo=20;//20
     
     List<DisparoNaveInvadida> disparos = new ArrayList<>();
 
