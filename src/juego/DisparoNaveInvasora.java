@@ -11,15 +11,16 @@ public class DisparoNaveInvasora extends Disparo{
 	public DisparoNaveInvasora(Integer x,Integer y, Integer EspANCHO, Integer EspALTO, Integer ancho_nave, Integer alto_nave) {
 		super(x,y,EspANCHO,EspALTO,ancho_nave,alto_nave);
 		velY=4;
+		x=+ancho_nave/2-4;
+		y=-alto_nave/8;
 	}
 	
 	@Override
 	public void paint(Graphics g) {
 		if(!desaparece) {
 			ImageIcon disparo = new ImageIcon(getClass().getResource("/imagenes/disparoInvasor.png"));
-			g.drawImage(disparo.getImage(), x+ancho_nave/2-4, y-alto_nave/8, ANCHO, ALTO, null);
+			g.drawImage(disparo.getImage(), x, y, ANCHO, ALTO, null);
 			moverse();
-			//System.out.println("x: " + (x+ancho_nave/2-4) + "y: "+(y-alto_nave/8));
 		}
 	}
 	
@@ -35,7 +36,7 @@ public class DisparoNaveInvasora extends Disparo{
 	
 	public void choque(NaveInvadida nave) {
 		if(nave.getVivo()&&!desaparece) {
-			Rectangle2D disparoReact = new Rectangle2D.Double(x+ancho_nave/2-4, y-alto_nave/8, ANCHO, ALTO);
+			Rectangle2D disparoReact = new Rectangle2D.Double(x, y, ANCHO, ALTO);
 			Rectangle2D naveReact = nave.getBoundsNaveInvadida();
 			
 			if(disparoReact.intersects(naveReact)) {

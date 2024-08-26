@@ -17,7 +17,7 @@ public class NaveInvadida extends Nave {
     private boolean dPressed = false;
     private boolean wPressed = false;
     private Integer temp=10;
-    private Integer tiempoEntreDisparo=16;
+    private Integer tiempoEntreDisparo=1;
     
     List<DisparoNaveInvadida> disparos = new ArrayList<>();
 
@@ -128,6 +128,12 @@ public class NaveInvadida extends Nave {
     }
     public Integer getEspAlto() {
     	return EspALTO;
+    }
+    public Integer getX() {
+    	return x;
+    }
+    public Integer getY() {
+    	return y;
     }
     public void reaparecer() {
         x = EspANCHO / 2 - ANCHO/2;

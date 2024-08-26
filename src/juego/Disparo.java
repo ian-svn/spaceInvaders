@@ -36,6 +36,6 @@ public abstract class Disparo {
 	public abstract void paint(Graphics g);	
 	
     public Rectangle2D getBoundsDisparo() {
-        return new Rectangle2D.Double(x, y, 13, 70);
+        return new Rectangle2D.Double(x, y, ANCHO, ALTO);
     }
 }

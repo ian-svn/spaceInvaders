@@ -24,12 +24,15 @@ public class Juego extends JPanel implements ActionListener {
     private static JFrame frame = new JFrame("Space Invaders");
     private static Juego juego = new Juego();
     
+    //private static BackgroundMusic bgMusic;
+    
     private Integer nivel=1;
     private Integer aux=0;
     private Boolean disparo;
     private Timer timer;
     private NaveInvadida nave;
     private ImageIcon fondo;
+    private List<ImageIcon> vidas = new ArrayList<>();
     private Boolean MovimientoHorizontal=true;
     private Boolean MovimientoVertical=false;
     
@@ -41,6 +44,10 @@ public class Juego extends JPanel implements ActionListener {
         nave = new NaveInvadida(ANCHO, ALTO);
 
         fondo = new ImageIcon(getClass().getResource("/gif/fondo.gif"));
+        
+        vidas.add(new ImageIcon(getClass().getResource("/imagenes/vida.png")));
+        vidas.add(new ImageIcon(getClass().getResource("/imagenes/vida.png")));
+        vidas.add(new ImageIcon(getClass().getResource("/imagenes/vida.png")));
         
         addKeyListener(new KeyListener() {
             @Override
@@ -70,6 +77,10 @@ public class Juego extends JPanel implements ActionListener {
         super.paintComponent(g);
         
         g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+
+        paintVidas(g);
+
+        checkGanar(g);
         
         if(nivel==1&&aux==0) {
         	for(int x = 0;x<=35;x++) {
@@ -157,8 +168,40 @@ public class Juego extends JPanel implements ActionListener {
              	    enemigos.add(new NaveInvasora(posX,200,ANCHO, ALTO,this));
         		}
             }
+        } else if(nivel==4&&aux==0) {
+        	
+        	for(int x = 0;x<=35;x++) {
+        		int posX=1;
+        		if(x>0&&x<=7) {
+        			posX+=66*x;
+        			if((x-7)==4||(x-7)==5) {
+        			    enemigos.add(new NaveInvasoraDisparadora(posX,40,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,40,ANCHO, ALTO,this));	
+        			}
+        		} else if(x>7&&x<=7*2) {
+        			posX+=66*(x-7);
+             	    enemigos.add(new NaveKamikaze(posX,80,ANCHO, ALTO,this));
+        		} else if(x>7*2&&x<=7*3) {
+        			posX+=66*(x-7*2);
+        			if((x-7*2)==1||(x-7*2)==7) {
+        			    enemigos.add(new NaveInvasoraDisparadora(posX,120,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,120,ANCHO, ALTO,this));	
+        			}
+        		} else if(x>7*3&&x<=7*4) {
+        			posX+=66*(x-7*3);
+        			if((x-7*3)==1||(x-7*3)==3||(x-7*3)==5) {
+        			    enemigos.add(new NaveKamikaze(posX,160,ANCHO, ALTO,this));
+                 	} else {
+                 	    enemigos.add(new NaveInvasora(posX,160,ANCHO, ALTO,this));	
+        			}
+             	} else if(x>7*4&&x<=7*5) {
+        			posX+=66*(x-7*4);
+             	    enemigos.add(new NaveInvasora(posX,200,ANCHO, ALTO,this));
+        		}
+            }
         }
-
         nave.paint(g);
         
         aux=1;
@@ -203,7 +246,7 @@ public class Juego extends JPanel implements ActionListener {
         nave.moverse();
         repaint();
     }
-
+    
     public static void main(String[] args) {
         frame.add(juego);
         frame.setSize(ANCHO, ALTO);
@@ -212,7 +255,9 @@ public class Juego extends JPanel implements ActionListener {
         frame.setFocusable(true);
         frame.setLocationRelativeTo(null);
 
-
+        //bgMusic = new BackgroundMusic();
+        //bgMusic.playMusic("/audio/starwars.wav"); // Cambia la ruta por la ubicación de tu archivo de audio
+    
         juego.requestFocusInWindow();
     }
     
@@ -235,7 +280,7 @@ public class Juego extends JPanel implements ActionListener {
     			count++;
     		}
     	}
-    	if(count==0) {
+    	if(count==0&&nivel<=4) {
     		nivel++;
     		aux=0;
     		enemigos.clear();
@@ -244,28 +289,35 @@ public class Juego extends JPanel implements ActionListener {
         	nave.reaparecer();
     	}
     }
+    
+    public void checkGanar(Graphics g) {
+    	if(nivel==5) {
+    		int tamanioLetra=35;
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, tamanioLetra));
+            g.drawString("Felicidades. Ganaste !!", ANCHO/4-tamanioLetra, ALTO/2-ALTO/5);
+    	} else {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 24)); 
+            g.drawString("Nivel: " + nivel, 10, 30);	
+    	}
+    }
+
+    private void paintVidas(Graphics g) {
+    	for(int x=0;x<vidas.size();x++) {
+        	if(nave.getVidas()>=1&&x==0) {
+        		g.drawImage(vidas.get(x).getImage(), ANCHO-ANCHO/8-50*x,  0, 0+ANCHO/10, 0+ALTO/10-ANCHO/85, this);	
+        	}if(nave.getVidas()>=2&&x==1) {
+        		g.drawImage(vidas.get(x).getImage(), ANCHO-ANCHO/8-50*x,  0, 0+ANCHO/10, 0+ALTO/10-ANCHO/85, this);	
+        	}if(nave.getVidas()>=3&&x==2) {
+        		g.drawImage(vidas.get(x).getImage(), ANCHO-ANCHO/8-50*x,  0, 0+ANCHO/10, 0+ALTO/10-ANCHO/85, this);	
+        	}
+        }
+    	if(nave.getVidas()<=0) {
+    	}
+    }
+    
     public NaveInvadida getNaveInvadida(){
     	return nave;
     }
-    /*
-    private void drawTextWithOutline(Graphics g, String text, int x, int y, Color outlineColor, Color textColor) throws Exception {
-    	InputStream is = getClass().getResourceAsStream("/fuentes/NewAmsterdam-Regular.ttf");
-        Font win = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(24f);
-        g.setFont(win);
-        
-        Color originalColor = g.getColor();
-        g.setColor(outlineColor);
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-                if (i != 0 || j != 0) {
-                    g.drawString(text, x + i, y + j);
-                }
-            }
-        }
-
-        g.setColor(textColor);
-        g.drawString(text, x, y);
-        g.setColor(originalColor);
-    }
-	*/
 }
