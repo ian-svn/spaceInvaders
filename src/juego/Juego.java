@@ -18,8 +18,8 @@ import javax.swing.Timer;
 public class Juego extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    private static final int ANCHO = 600;
-    private static final int ALTO = 700;
+    private static final int ANCHO=600;
+    private static final int ALTO=700;
     private static JFrame frame = new JFrame("Space Invaders");
     private static Juego juego = new Juego();
     
@@ -59,14 +59,12 @@ public class Juego extends JPanel implements ActionListener {
             @Override
             public void keyPressed(KeyEvent e) {
                 nave.keyPressed(e);
-                if(!nave.getVivo()) {
-                	if(pausa) {
-                    	if (e.getKeyCode() == KeyEvent.VK_R) {
-                            reset();
-                    	}
-                        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                            volverMenu();
-                        }
+                if(pausa) {
+                	if (e.getKeyCode() == KeyEvent.VK_R) {
+                        reset();
+                	}
+                    if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                        volverMenu();
                     }
                 }
             }
@@ -188,8 +186,6 @@ public class Juego extends JPanel implements ActionListener {
     	if(count==0&&nivel<=niveles) {
     		nivel++;
     		aux=0;
-    		enemigos.clear();
-    		enemigosD.clear();
         	nave.getDisparos().clear();
         	nave.reaparecer();
     	}
@@ -201,11 +197,12 @@ public class Juego extends JPanel implements ActionListener {
     	if(nivel>=6) {
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, tamanioLetraTitulo));
-            g.drawString("¡¡ Felicidades", ANCHO/10, ALTO/2-ALTO/5);
-            g.drawString("   Ganaste !!", ANCHO/10, ALTO/2-ALTO/10);
+            g.drawString("¡¡ Felicidades", ANCHO/12, ALTO/2-ALTO/5);
+            g.drawString("   Ganaste !!", ANCHO/12, ALTO/2-ALTO/10);
             g.setFont(new Font("Arial", Font.BOLD, tamanioLetraSubTitulo));
             g.drawString("Toque la tecla [R] para volver a jugar.", ANCHO/8+ANCHO/16, ALTO-ALTO/3);
             g.drawString("Toque la tecla [ESC] para volver al menu. ", ANCHO/8+ANCHO/16, ALTO-ALTO/4);
+            pausa=true;
     	} else {
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, 24)); 
@@ -230,6 +227,10 @@ public class Juego extends JPanel implements ActionListener {
     	
     }
     
+    public void correr() {
+    	reset();
+    }
+    
     public void reset() {
     	frame.dispose();
 	    frame = new JFrame("Space Invaders");
@@ -247,7 +248,7 @@ public class Juego extends JPanel implements ActionListener {
     
     public void volverMenu() {
     	frame.dispose();
-    	Menus menu = new Menus();
+    	Menu menu = new Menu();
     	menu.correr();
     }
 
