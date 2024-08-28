@@ -25,7 +25,7 @@ public class NaveInvadida extends Nave {
     
     private Integer tempExplotando=200;
     private Integer temp=10;
-    private Integer tiempoEntreDisparo=2;//20
+    private Integer tiempoEntreDisparo=20;
     
     List<DisparoNaveInvadida> disparos = new ArrayList<>();
 
@@ -34,7 +34,6 @@ public class NaveInvadida extends Nave {
     	this.EspANCHO = EspANCHO;
         x = EspANCHO / 2 - ANCHO/2;
         y = EspALTO-ALTO-ALTO/2-ALTO/8;
-        //System.out.println("Espalto: " +EspALTO+" eAnc:" + EspANCHO +" Anc:" + ANCHO +" AL:" + ALTO +" Y:" + y  + " X:" + x );
     }
 
     public NaveInvadida(Integer x,Integer y, Integer EspANCHO, Integer EspALTO) {
@@ -170,7 +169,6 @@ public class NaveInvadida extends Nave {
     }
     
     public void vidaMenos() {
-    	//System.out.println("Vidas: "+vidas);
     	vidas--;
     	if(vidas==0){
     		destruirse();

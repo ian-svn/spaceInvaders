@@ -41,7 +41,7 @@ public class Menu extends JPanel implements ActionListener {
 
     public Menu() {
         initialize();
-        timer = new Timer(10, this); // Inicializamos el Timer con el ActionListener
+        timer = new Timer(10, this); 
         timer.start();
     }
     
@@ -55,31 +55,29 @@ public class Menu extends JPanel implements ActionListener {
         frame.setFocusable(true);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null); // Usamos layout null para posicionar los componentes manualmente
+        frame.getContentPane().setLayout(null);
 
-        // Cargar el GIF animado en un ImageIcon y obtener la imagen
         fondoImage = new ImageIcon(getClass().getResource("/gif/fondo.gif")).getImage();
         
-        // Configurar el panel como contenido del JFrame
         this.setBounds(0, 0, ANCHO, ALTO);
-        this.setOpaque(false); // Hacer el panel transparente para que se vea la imagen de fondo
-        frame.setContentPane(this); // Establece el JPanel como el contenido del JFrame
-        this.setLayout(null); // Usamos layout null para añadir componentes sobre el fondo
+        this.setOpaque(false); 
+        frame.setContentPane(this);
+        this.setLayout(null);
 
         JLabel Titulo = new JLabel("Space Invaders");
         Titulo.setForeground(Color.WHITE);
         Titulo.setFont(new Font("Arial", Font.BOLD, 60));
-        Titulo.setBounds(85, 93, 489, 114); // Centramos el texto
-        this.add(Titulo); // Añadimos el JLabel del texto sobre el fondo
+        Titulo.setBounds(85, 93, 489, 114); 
+        this.add(Titulo); 
 
         JButton Jugar = new JButton("Jugar");
         Jugar.setForeground(Color.WHITE);
         Jugar.setOpaque(false);
         Jugar.setContentAreaFilled(false);
         Jugar.setFont(new Font("Arial", Font.BOLD, 40));
-        Jugar.setBounds(102, 324, 395, 74); // Centramos el botón "Salir"
-        Jugar.setRequestFocusEnabled(true); // Centramos el botón "Jugar"
-        Jugar.setFocusable(false); // Centramos el botón "Jugar"
+        Jugar.setBounds(102, 324, 395, 74); 
+        Jugar.setRequestFocusEnabled(true); 
+        Jugar.setFocusable(false);
         Jugar.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseEntered(MouseEvent e) {
@@ -97,16 +95,16 @@ public class Menu extends JPanel implements ActionListener {
                 juego.correr();
         	}
         });
-        this.add(Jugar); // Añadimos el botón sobre el fondo
+        this.add(Jugar); 
 
         JButton Salir = new JButton("Salir");
         Salir.setForeground(Color.WHITE);
         Salir.setOpaque(false);
         Salir.setContentAreaFilled(false);
         Salir.setFont(new Font("Arial", Font.BOLD, 40));
-        Salir.setBounds(102, 440, 395, 74); // Centramos el botón "Salir"
-        Salir.setRequestFocusEnabled(true); // Centramos el botón "Jugar"
-        Salir.setFocusable(false); // Centramos el botón "Jugar"
+        Salir.setBounds(102, 440, 395, 74); 
+        Salir.setRequestFocusEnabled(true); 
+        Salir.setFocusable(false);
         Salir.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseEntered(MouseEvent e) {
@@ -120,24 +118,24 @@ public class Menu extends JPanel implements ActionListener {
         Salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0); // Cierra la aplicación
+                System.exit(0);
             }
             
         });
-        this.add(Salir); // Añadimos el botón sobre el fondo
+        this.add(Salir);
 
-        frame.setVisible(true); // Sólo es necesario una vez
+        frame.setVisible(true);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Redibujar la imagen de fondo para que cubra toda el área del JPanel
+
         g.drawImage(fondoImage, 0, 0, getWidth(), getHeight(), this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint(); // Redibujar el panel si es necesario
+        repaint(); 
     }
 }

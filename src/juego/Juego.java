@@ -286,8 +286,6 @@ public class Juego extends JPanel implements ActionListener {
    public void perkMenos(NaveInvasora naveI) {
     	if(perkSpawn<=0) {
     		Perk perk = new Perk(naveI,ANCHO,ALTO);
-    		//System.out.println(perk.getNave().getVivo());
-    		//sSystem.out.println(naveI.getVivo());
     		perks.add(perk);
     		perkSpawn=30;
     	}
