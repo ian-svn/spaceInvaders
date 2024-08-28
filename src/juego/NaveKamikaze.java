@@ -28,12 +28,14 @@ public class NaveKamikaze extends NaveInvasora{
 			g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);
 			temp--;
 			if(temp<=0&&aux==2&&vivo) {
+				int aux=0;
 				try {
 					if(recorreY<movimientosY.size()&&juego.getNaveInvadida().getVivo()) {
 						x+=movimientosX.get(recorreX);
 						recorreX++;
 						x+=movimientosX.get(recorreX);
 						recorreX++;
+						aux=1;
 					}
 				} catch(IndexOutOfBoundsException e) {y+=2;}
 				try {
@@ -42,13 +44,17 @@ public class NaveKamikaze extends NaveInvasora{
 						recorreY++;
 						y+=movimientosY.get(recorreY);
 						recorreY++;
+						aux=1;
 					}
-				} catch(IndexOutOfBoundsException e) {y+=2;}	
+				} catch(IndexOutOfBoundsException e) {y+=2;}
+				if(aux==0) {
+					y+=2;
+				}
 			}
 		}
-		if(x>EspANCHO||y>EspALTO) {
+		if(!(x<=EspANCHO&&y<=EspALTO)) {
 			vivo=false;
-			System.out.println("vivo: " + vivo);
+			//System.out.println("vivo: " + vivo);
 		}
 	}
 	

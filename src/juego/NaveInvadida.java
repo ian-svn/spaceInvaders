@@ -12,12 +12,20 @@ public class NaveInvadida extends Nave {
 	
     private Integer vidas = 3;
     private final Integer XVEL = 5;
+    private Boolean escudada=false;
+
+    private ImageIcon explosion;
+    private Boolean dobleDisparo=false;
+    
+    private Boolean perdiendo=false;
     
     private boolean aPressed = false;
     private boolean dPressed = false;
     private boolean wPressed = false;
+    
+    private Integer tempExplotando=200;
     private Integer temp=10;
-    private Integer tiempoEntreDisparo=20;//20
+    private Integer tiempoEntreDisparo=2;//20
     
     List<DisparoNaveInvadida> disparos = new ArrayList<>();
 
@@ -38,9 +46,12 @@ public class NaveInvadida extends Nave {
     
     @Override
     public void paint(Graphics g) {
-    	if(vivo) {
-    	    ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveDefensora.png"));
-            g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);   
+    	if(perdiendo==true&&vivo) {
+    		explosion = new ImageIcon(getClass().getResource("/gif/explosion.gif"));
+            g.drawImage(explosion.getImage(), x, y, ANCHO, ALTO, null);
+    	} else if(vivo) {
+    		ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveDefensora.png"));
+            g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);
     	}
     	for(int x=0;x<disparos.size();x++) {
         	disparos.get(x).paint(g);
@@ -49,7 +60,7 @@ public class NaveInvadida extends Nave {
 
     @Override
     public void moverse() {
-    	if(vivo) {
+    	if(vivo&&!perdiendo) {
 	    	if(temp>0) {
 	        	temp-=1;
 	    	}
@@ -72,14 +83,29 @@ public class NaveInvadida extends Nave {
     }
 
     public void disparar() {
-    	DisparoNaveInvadida disparo = new DisparoNaveInvadida(x,y,EspANCHO,EspALTO,ANCHO,ALTO);
-    	disparos.add(disparo);
-    	temp=tiempoEntreDisparo;
+    	if(!dobleDisparo) {
+    		DisparoNaveInvadida disparo = new DisparoNaveInvadida(x,y,EspANCHO,EspALTO,ANCHO,ALTO);
+        	disparos.add(disparo);
+        	temp=tiempoEntreDisparo;	
+    	} else {
+    		DisparoNaveInvadida disparo = new DisparoNaveInvadida(x-10,y,EspANCHO,EspALTO,ANCHO,ALTO);
+    		DisparoNaveInvadida disparo2 = new DisparoNaveInvadida(x+10,y,EspANCHO,EspALTO,ANCHO,ALTO);
+        	disparos.add(disparo);
+        	disparos.add(disparo2);
+        	temp=tiempoEntreDisparo;
+    	}
     }
 
     @Override
     public void destruirse() {
-    	vivo=false;
+    	explotando();
+    }
+    public void explotando() {
+    	perdiendo=true;
+    	tempExplotando--;
+    	if(tempExplotando<=0) {
+    		vivo=false;
+    	}
     }
     
     public void choqueNaves(NaveInvasora naveInvasora) {
@@ -88,7 +114,7 @@ public class NaveInvadida extends Nave {
     		Rectangle2D naveInvasoraReact = naveInvasora.getBoundsNaveInvasora();
     		if(naveReact.intersects(naveInvasoraReact)) {
     			vidas=0;
-				destruirse();
+    			destruirse();
     		}
     	}
     }
@@ -96,13 +122,13 @@ public class NaveInvadida extends Nave {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_A) aPressed = true;
         if (e.getKeyCode() == KeyEvent.VK_D) dPressed = true;
-        if (e.getKeyCode() == KeyEvent.VK_W) wPressed = true;
+        if (e.getKeyCode() == KeyEvent.VK_W||e.getKeyCode() == KeyEvent.VK_SPACE) wPressed = true;
     }
 
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_A) aPressed = false;
         if (e.getKeyCode() == KeyEvent.VK_D) dPressed = false;
-        if (e.getKeyCode() == KeyEvent.VK_W) wPressed = false;
+        if (e.getKeyCode() == KeyEvent.VK_W||e.getKeyCode() == KeyEvent.VK_SPACE) wPressed = false;
     }
     
     public Rectangle2D getBoundsNaveInvadida() {
@@ -139,12 +165,23 @@ public class NaveInvadida extends Nave {
         x = EspANCHO / 2 - ANCHO/2;
         y = EspALTO-ALTO-ALTO/2-ALTO/8;
     }
+    public void disparoDoble() {
+    	dobleDisparo=true;
+    }
+    
     public void vidaMenos() {
-    	System.out.println("Vidas: "+vidas);
+    	//System.out.println("Vidas: "+vidas);
     	vidas--;
     	if(vidas==0){
     		destruirse();
     	}
+    }
+    public void vidaMas() {
+    	vidas++;
+    }
+    
+    public void escudarse() {
+    	escudada=true;
     }
 
     public List<DisparoNaveInvadida> getDisparos() {

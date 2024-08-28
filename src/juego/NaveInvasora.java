@@ -54,6 +54,7 @@ public class NaveInvasora extends Nave{
 	//Rectangle2D DisparoNaveInvadidaHitbox = new Rectangle2D.Double(x, y, ANCHO, ALTO);
 	@Override
 	public void destruirse() {
+		juego.perkMenos(this);
 		vivo=false;
 	}
 	
@@ -66,6 +67,9 @@ public class NaveInvasora extends Nave{
         return new Rectangle2D.Double(x, y, ANCHO, ALTO);
     }
     
+    public Integer getAncho() {
+		return ANCHO;
+	}
     public Boolean getVivo() {
 		return vivo;
 	}

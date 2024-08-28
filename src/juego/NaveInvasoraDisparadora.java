@@ -12,7 +12,7 @@ public class NaveInvasoraDisparadora extends NaveInvasora{
 	
 	Random random = new Random();
     int min = 80;
-    int max = 200;
+    int max = 300;
     int tempDisparo=random.nextInt(max - min + 1) + min;
     List<DisparoNaveInvasora> disparos = new ArrayList<>();
 	
