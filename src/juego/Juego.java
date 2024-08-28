@@ -217,7 +217,7 @@ public class Juego extends JPanel implements ActionListener {
         		perks.clear();
                 g.setColor(Color.WHITE);
                 g.setFont(new Font("Arial", Font.BOLD, tamanioLetraTitulo));
-                g.drawString("Perdiste...", ANCHO/4+ANCHO/16, ALTO/3);
+                g.drawString("Perdiste...", ANCHO/7+ANCHO/16, ALTO/3);
                 g.setFont(new Font("Arial", Font.BOLD, tamanioLetraSubTitulo));
                 g.drawString("Toque la tecla [R] para volver a jugar.", ANCHO/8+ANCHO/16, ALTO-ALTO/3);
                 g.drawString("Toque la tecla [ESC] para volver al menu. ", ANCHO/8+ANCHO/16, ALTO-ALTO/4);

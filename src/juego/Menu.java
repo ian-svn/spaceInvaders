@@ -79,6 +79,7 @@ public class Menu extends JPanel implements ActionListener {
         Jugar.setFont(new Font("Arial", Font.BOLD, 40));
         Jugar.setBounds(102, 324, 395, 74); // Centramos el botón "Salir"
         Jugar.setRequestFocusEnabled(true); // Centramos el botón "Jugar"
+        Jugar.setFocusable(false); // Centramos el botón "Jugar"
         Jugar.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseEntered(MouseEvent e) {
@@ -105,6 +106,7 @@ public class Menu extends JPanel implements ActionListener {
         Salir.setFont(new Font("Arial", Font.BOLD, 40));
         Salir.setBounds(102, 440, 395, 74); // Centramos el botón "Salir"
         Salir.setRequestFocusEnabled(true); // Centramos el botón "Jugar"
+        Salir.setFocusable(false); // Centramos el botón "Jugar"
         Salir.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseEntered(MouseEvent e) {
