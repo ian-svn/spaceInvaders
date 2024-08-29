@@ -17,7 +17,6 @@ public class NaveInvasora extends Nave{
 	public NaveInvasora(Integer x, Integer y, Integer EspANCHO, Integer EspALTO, Juego juego) {
 		super(x, y, EspANCHO, EspALTO);
 		this.juego = juego;
-		this.spawn(EspANCHO);
 	}
 	
 	@Override

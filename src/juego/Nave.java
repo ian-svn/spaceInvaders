@@ -32,10 +32,10 @@ public abstract class Nave {
 		this.EspALTO = EspALTO;
 	}
 	
-	public void spawn(Integer EspANCHO) {
-		x = random.nextInt((EspANCHO-ANCHO) - 50 + 1) + 50;
-		//System.out.println(x + " max: " + (EspANCHO-ANCHO));
-		//462
+	public void spawn(Integer EspANCHO,NaveJefeFinal nave) {
+		int max=EspANCHO-nave.getAncho()-nave.getAncho()-nave.getAncho()-30;
+		x = random.nextInt(max - 50 + 1) + 50;
+		//System.out.println(x + " max: " + max);
 	}
 
 	public abstract void moverse();
