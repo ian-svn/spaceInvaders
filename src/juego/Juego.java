@@ -26,7 +26,7 @@ public class Juego extends JPanel implements ActionListener {
     //private static BackgroundMusic bgMusic;
     
     private Integer nivel=1;
-    private Integer niveles=7;
+    private Integer niveles=6;
     private Integer aux=0;
     private Timer timer;
     private NaveInvadida nave;
@@ -130,7 +130,9 @@ public class Juego extends JPanel implements ActionListener {
 	
     	for(int x = 0;x<enemigos.size();x++) {
     		if(MovimientoVertical) {
-    			enemigos.get(x).setY(enemigos.get(x).getY()+10);
+    			if(nivel!=5) {
+    				enemigos.get(x).setY(enemigos.get(x).getY()+10);		
+    			}
     		}
     		enemigos.get(x).moverse();
             nave.choqueNaves(enemigos.get(x));
@@ -183,7 +185,7 @@ public class Juego extends JPanel implements ActionListener {
     			count++;
     		}
     	}
-    	if(count==0&&nivel<=niveles) {
+    	if(count==0&&nivel<niveles) {
     		nivel++;
     		aux=0;
         	nave.getDisparos().clear();
@@ -197,8 +199,8 @@ public class Juego extends JPanel implements ActionListener {
     	if(nivel>=6) {
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, tamanioLetraTitulo));
-            g.drawString("¡¡ Felicidades", ANCHO/12, ALTO/2-ALTO/5);
-            g.drawString("   Ganaste !!", ANCHO/12, ALTO/2-ALTO/10);
+            g.drawString(" Felicidades", ANCHO/12, ALTO/2-ALTO/5);
+            g.drawString("  Ganaste !!", ANCHO/12, ALTO/2-ALTO/10);
             g.setFont(new Font("Arial", Font.BOLD, tamanioLetraSubTitulo));
             g.drawString("Toque la tecla [R] para volver a jugar.", ANCHO/8+ANCHO/16, ALTO-ALTO/3);
             g.drawString("Toque la tecla [ESC] para volver al menu. ", ANCHO/8+ANCHO/16, ALTO-ALTO/4);
@@ -292,6 +294,11 @@ public class Juego extends JPanel implements ActionListener {
     	perkSpawn--;
     }
     
+    public void perder() {
+    	nave.destruirse();
+    	pausa=false;
+    }
+   
     private void generarNivel() {
 	    if (aux == 0) {
 	        int posX;
@@ -393,32 +400,7 @@ public class Juego extends JPanel implements ActionListener {
 	                }
 	                break;
 	            case 5:
-	                for (int x = 0; x < 35; x++) {
-	                    posX = 1 + 74 * (x % 7);
-	                    if (x < 7) {
-	                        if (x == 4 || x == 5) {
-	                            enemigos.add(new NaveInvasoraDisparadora(posX, 40, ANCHO, ALTO, this));
-	                        } else {
-	                            enemigos.add(new NaveInvasora(posX, 40, ANCHO, ALTO, this));
-	                        }
-	                    } else if (x < 14) {
-	                        enemigos.add(new NaveInvasora(posX, 80, ANCHO, ALTO, this));
-	                    } else if (x < 21) {
-	                        if ((x - 14) == 1 || (x - 14) == 7) {
-	                            enemigos.add(new NaveInvasoraDisparadora(posX, 120, ANCHO, ALTO, this));
-	                        } else {
-	                            enemigos.add(new NaveKamikaze(posX, 120, ANCHO, ALTO, this));
-	                        }
-	                    } else if (x < 28) {
-	                        if ((x - 21) == 1 || (x - 21) == 3 || (x - 21) == 5) {
-	                            enemigos.add(new NaveInvasoraDisparadora(posX, 160, ANCHO, ALTO, this));
-	                        } else {
-	                            enemigos.add(new NaveInvasora(posX, 160, ANCHO, ALTO, this));
-	                        }
-	                    } else {
-	                        enemigos.add(new NaveKamikaze(posX, 200, ANCHO, ALTO, this));
-	                    }
-	                }
+	            	enemigos.add(new NaveJefeFinal(150,10,ANCHO,ALTO,this));
 	                break;
 	        }
 	        aux = 1;

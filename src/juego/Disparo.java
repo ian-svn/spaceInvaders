@@ -5,9 +5,9 @@ import java.awt.geom.Rectangle2D;
 
 public abstract class Disparo {
 	
-	final protected Integer ANCHO=10;
-	final protected Integer ALTO=30;
-	public Integer velY=8;
+	protected Integer ANCHO=10;
+	protected Integer ALTO=30;
+	public Integer velY=6;
 	protected Integer x;
 	protected Integer y;
 	protected Integer EspANCHO; 

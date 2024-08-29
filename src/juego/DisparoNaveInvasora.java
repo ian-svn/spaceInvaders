@@ -5,18 +5,25 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.ImageIcon;
 
 public class DisparoNaveInvasora extends Disparo{
-	
 	Boolean desaparece=false;
+	private String path="/imagenes/disparoInvasor.png";
 	
 	public DisparoNaveInvasora(Integer x,Integer y, Integer EspANCHO, Integer EspALTO, Integer ancho_nave, Integer alto_nave) {
 		super(x,y,EspANCHO,EspALTO,ancho_nave,alto_nave);
-		velY=4;
+		this.y=y;
+	}
+	public DisparoNaveInvasora(Integer x,Integer y, Integer EspANCHO, Integer EspALTO, Integer ANCHO,Integer ALTO, Integer ancho_nave, Integer alto_nave,String path) {
+		super(x,y,EspANCHO,EspALTO,ancho_nave,alto_nave);
+		this.ANCHO=ANCHO;
+		this.ALTO=ALTO;
+		this.y=y;
+		this.path=path;
 	}
 	
 	@Override
 	public void paint(Graphics g) {
 		if(!desaparece) {
-			ImageIcon disparo = new ImageIcon(getClass().getResource("/imagenes/disparoInvasor.png"));
+			ImageIcon disparo = new ImageIcon(getClass().getResource(path));
 			g.drawImage(disparo.getImage(), x+ancho_nave/2-4, y+alto_nave/6, ANCHO, ALTO, null);
 			moverse();
 		}
@@ -51,8 +58,30 @@ public class DisparoNaveInvasora extends Disparo{
 		 desaparece=true;
 	}
 	
+	public Integer getX() {
+		return x;
+	}
+	public Integer getY() {
+		return y;
+	}
+
+	public Integer getAncho() {
+		return ANCHO;
+	}
+	public Integer getAlto() {
+		return ALTO;
+	}
 	
 	public Rectangle2D getBoundsDisparoND() {
 		return new Rectangle2D.Double(x+ancho_nave/2-4, y-alto_nave/8, ANCHO, ALTO);
+    }
+	
+	public Rectangle2D getBoundsDisparoJefe() {
+		//System.out.println("x: "+x);
+		return new Rectangle2D.Double(x+150,y,ANCHO, ALTO);
+    }
+	
+	public Rectangle2D getBoundsDisparo() {
+		return new Rectangle2D.Double(x, y, ANCHO, ALTO);
     }
 }

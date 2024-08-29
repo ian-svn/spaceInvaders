@@ -1,6 +1,7 @@
 package juego;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 public abstract class Nave {
 	final protected Integer ANCHO = 76;
@@ -13,6 +14,8 @@ public abstract class Nave {
 	
 	Boolean vivo=true;
 
+	private Random random = new Random();
+	
 	public Nave() {
 		
 	}
@@ -27,6 +30,12 @@ public abstract class Nave {
 		this.y = y;
 		this.EspANCHO = EspANCHO;
 		this.EspALTO = EspALTO;
+	}
+	
+	public void spawn(Integer EspANCHO) {
+		x = random.nextInt((EspANCHO-ANCHO) - 50 + 1) + 50;
+		//System.out.println(x + " max: " + (EspANCHO-ANCHO));
+		//462
 	}
 
 	public abstract void moverse();

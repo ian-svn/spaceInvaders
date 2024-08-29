@@ -22,12 +22,15 @@ public class DisparoNaveInvadida extends Disparo{
 		}
 	}
 	
+	public void desaparecer() {
+		desaparece=true;
+	}
 
 	@Override
 	public void moverse() {
-		if(y>0&&y<=EspALTO&&!desaparece) {
+		if(y>0&&y<=EspALTO-ALTO*2&&!desaparece) {
 			y-=velY;
-		} else if(y<0){
+		} else {
 			desaparece=true;
 		}
 	}
