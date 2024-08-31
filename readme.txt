@@ -1,0 +1,1 @@
+link del manual de usuario: https://docs.google.com/document/d/1YiwUIw-P0S8g2E1FK6TJ1EKqSzR1N8YzLgKJDr8ZvW0/edit?usp=sharing
