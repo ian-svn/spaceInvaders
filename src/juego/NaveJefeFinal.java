@@ -41,7 +41,7 @@ public class NaveJefeFinal extends NaveInvasora{
 	public void paint(Graphics g) {
 		//System.out.println(vida);
 		if(perdiendo==true&&vivo) {
-    		explosion = new ImageIcon(getClass().getResource("/gif/explosion.gif"));
+    		explosion = new ImageIcon(getClass().getResource("/gif/explosion1.gif"));
             g.drawImage(explosion.getImage(), x, y, ANCHO, ALTO, null);
             tempDestrutyendose--;
             if(tempDestrutyendose<=0) {

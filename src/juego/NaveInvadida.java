@@ -46,7 +46,7 @@ public class NaveInvadida extends Nave {
     @Override
     public void paint(Graphics g) {
     	if(perdiendo==true&&vivo) {
-    		explosion = new ImageIcon(getClass().getResource("/gif/explosion.gif"));
+    		explosion = new ImageIcon(getClass().getResource("/gif/explosion1.gif"));
             g.drawImage(explosion.getImage(), x, y, ANCHO, ALTO, null);
     	} else if(vivo) {
     		ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveDefensora.png"));

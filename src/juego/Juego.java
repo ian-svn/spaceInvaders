@@ -25,7 +25,7 @@ public class Juego extends JPanel implements ActionListener {
     
     //private static BackgroundMusic bgMusic;
     
-    private Integer nivel=5;
+    private Integer nivel=1;
     private Integer niveles=6;
     private Integer aux=0;
     private Timer timer;
