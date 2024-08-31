@@ -33,7 +33,7 @@ public class NaveJefeFinal extends NaveInvasora{
 		this.EspALTO=EspALTO;
 		ANCHO=300;
 		ALTO=300;
-		x=random.nextInt(EspANCHO - 50 + 1) + 50;
+		this.spawn(EspANCHO, this);
 		y=10;
 	}
 	
