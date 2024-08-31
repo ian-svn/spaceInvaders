@@ -199,8 +199,8 @@ public class Juego extends JPanel implements ActionListener {
     	if(nivel>=6) {
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.BOLD, tamanioLetraTitulo));
-            g.drawString(" Felicidades", ANCHO/12, ALTO/2-ALTO/5);
-            g.drawString("  Ganaste !!", ANCHO/12, ALTO/2-ALTO/10);
+            g.drawString("¡¡ Felicidades", ANCHO/12, ALTO/2-ALTO/5);
+            g.drawString("   Ganaste !!", ANCHO/12, ALTO/2-ALTO/10);
             g.setFont(new Font("Arial", Font.BOLD, tamanioLetraSubTitulo));
             g.drawString("Toque la tecla [R] para volver a jugar.", ANCHO/8+ANCHO/16, ALTO-ALTO/3);
             g.drawString("Toque la tecla [ESC] para volver al menu. ", ANCHO/8+ANCHO/16, ALTO-ALTO/4);
@@ -294,11 +294,6 @@ public class Juego extends JPanel implements ActionListener {
     	perkSpawn--;
     }
     
-    public void perder() {
-    	nave.destruirse();
-    	pausa=false;
-    }
-   
     private void generarNivel() {
 	    if (aux == 0) {
 	        int posX;

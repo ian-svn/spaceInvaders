@@ -29,9 +29,6 @@ public class NaveInvasora extends Nave{
 		if(x>EspANCHO||y>EspALTO) {
 			vivo=false;
 		}
-		if(y>EspALTO-ALTO) {
-			juego.perder();
-		}
 	}
 	
 	@Override

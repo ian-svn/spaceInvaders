@@ -33,14 +33,15 @@ public class NaveJefeFinal extends NaveInvasora{
 		this.EspALTO=EspALTO;
 		ANCHO=300;
 		ALTO=300;
-		this.spawn(EspANCHO,this);
+		x=random.nextInt(EspANCHO - 50 + 1) + 50;
 		y=10;
 	}
 	
 	@Override
 	public void paint(Graphics g) {
+		//System.out.println(vida);
 		if(perdiendo==true&&vivo) {
-    		explosion = new ImageIcon(getClass().getResource("/gif/explosion1.gif"));
+    		explosion = new ImageIcon(getClass().getResource("/gif/explosion.gif"));
             g.drawImage(explosion.getImage(), x, y, ANCHO, ALTO, null);
             tempDestrutyendose--;
             if(tempDestrutyendose<=0) {
@@ -89,11 +90,11 @@ public class NaveJefeFinal extends NaveInvasora{
 	
 	public void moverse(){
 		if((!(cargando||disparando))&&!perdiendo) {
-			if(vivo&&x>=EspANCHO-ANCHO+ANCHO/12&&juego.getMovimientoH()) {
+			if(vivo&&x>=EspANCHO-ANCHO+ANCHO/10&&juego.getMovimientoH()) {
 				juego.setMovimientoH(false);
 				juego.setMovimientoV(true);
 			} 
-			if(vivo&&x<=-40&&!juego.getMovimientoH()) {
+			if(vivo&&x<=-60&&!juego.getMovimientoH()) {
 				juego.setMovimientoH(true);
 				juego.setMovimientoV(true);
 			}
