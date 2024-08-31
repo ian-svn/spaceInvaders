@@ -18,9 +18,7 @@ public class NaveJefeFinal extends NaveInvasora{
     private Boolean cargando=false;
     private Boolean disparando=false;
     private Integer tempDestrutyendose=300;
-    private Integer tiempoEntreDisparo=50;
     private Integer tempVidaPerdidaJefe=9;
-    private Integer tempVidaPerdidaND=9;
     private Integer tempEntreRayo=200;
     private Integer tempCarga=100;
     private Integer tempDisparo=100;

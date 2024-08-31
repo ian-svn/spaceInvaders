@@ -12,7 +12,6 @@ public class NaveInvadida extends Nave {
 	
     private Integer vidas = 3;
     private final Integer XVEL = 5;
-    private Boolean escudada=false;
 
     private ImageIcon explosion;
     private Boolean dobleDisparo=false;
@@ -176,10 +175,6 @@ public class NaveInvadida extends Nave {
     }
     public void vidaMas() {
     	vidas++;
-    }
-    
-    public void escudarse() {
-    	escudada=true;
     }
 
     public List<DisparoNaveInvadida> getDisparos() {

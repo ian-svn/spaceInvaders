@@ -1,5 +1,5 @@
 bin
-audio
+src/audio
 .classpath
 .project
 .settings
