@@ -22,7 +22,7 @@ public class NaveInvadida extends Nave {
     private boolean dPressed = false;
     private boolean wPressed = false;
     
-    private Integer tempExplotando=200;
+    private Integer tempExplotando=200, tempExplotandoAux=tempExplotando;
     private Integer temp=10;
     private Integer tiempoEntreDisparo=20;
     
@@ -44,7 +44,7 @@ public class NaveInvadida extends Nave {
     
     @Override
     public void paint(Graphics g) {
-    	if(perdiendo==true&&vivo) {
+    	if(perdiendo&&vivo) {
     		explosion = new ImageIcon(getClass().getResource("/gif/explosion1.gif"));
             g.drawImage(explosion.getImage(), x, y, ANCHO, ALTO, null);
     	} else if(vivo) {
@@ -179,5 +179,14 @@ public class NaveInvadida extends Nave {
 
     public List<DisparoNaveInvadida> getDisparos() {
     	return disparos;
+    }
+    
+    public void reset() {
+    	vivo=true;
+    	perdiendo=false;
+    	x=EspANCHO/2-ANCHO/2;
+    	vidas=3;
+    	tempExplotando = tempExplotandoAux;
+    	dobleDisparo=false;
     }
 }

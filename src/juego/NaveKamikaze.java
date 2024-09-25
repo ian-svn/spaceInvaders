@@ -52,7 +52,7 @@ public class NaveKamikaze extends NaveInvasora{
 				}
 			}
 		}
-		if(!(x<=EspANCHO&&y<=EspALTO)) {
+		if(y>=EspALTO) {
 			vivo=false;
 			//System.out.println("vivo: " + vivo);
 		}
@@ -76,6 +76,9 @@ public class NaveKamikaze extends NaveInvasora{
 			}
 			if(temp<=0){
 				reset();
+			}
+			if((y+ALTO)-20>=EspALTO) {
+				vivo=false;;
 			}
 		}
 		if(aux==1) {

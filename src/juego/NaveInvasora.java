@@ -1,5 +1,6 @@
 package juego;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
@@ -25,6 +26,8 @@ public class NaveInvasora extends Nave{
 			ImageIcon nave = new ImageIcon(getClass().getResource("/imagenes/naveenemiga.png"));
 			g.drawImage(nave.getImage(), x, y, ANCHO, ALTO, null);
 			temp--;
+			//g.setColor(Color.red);
+			//7g.fillRect(x,y, ANCHO, ALTO);
 		}
 		if(x>EspANCHO||y>EspALTO) {
 			vivo=false;
@@ -33,21 +36,28 @@ public class NaveInvasora extends Nave{
 	
 	@Override
 	public void moverse() {
-		if(vivo&&x>=EspANCHO-ANCHO-ANCHO/4&&juego.getMovimientoH()) {
-			juego.setMovimientoH(false);
-			juego.setMovimientoV(true);
-		} 
-		if(vivo&&x<=0&&!juego.getMovimientoH()) {
-			juego.setMovimientoH(true);
-			juego.setMovimientoV(true);
-		}
-		if(vivo&&juego.getMovimientoH()) {
-			x+=5;
-		} else if(vivo&&!juego.getMovimientoH()) {
-			x-=5;
-		}
-		if(temp<=0){
-			reset();
+		if(vivo){
+			if(vivo&&x>=EspANCHO-ANCHO-ANCHO/5) {
+				juego.setMovimientoH(false);
+				juego.avanzar();
+			} 
+			if(vivo&&x<=0) {
+				juego.setMovimientoH(true);
+				juego.avanzar();
+			}
+			if(vivo&&juego.getMovimientoH()) {
+				x+=5;
+			} else if(vivo&&!juego.getMovimientoH()) {
+				x-=5;
+			}
+
+			if(y+ALTO>=EspALTO) {
+				juego.perder();
+			}
+			
+			if(temp<=0){
+				reset();
+			}
 		}
 		//System.out.println("espAncho: " + (EspANCHO-ANCHO-ANCHO/4) + "temp: "+temp+" moveH: "+ juego.getMovimientoH() +" moveV: " + juego.getMovimientoV() + " x: " + x);
     }
@@ -88,5 +98,9 @@ public class NaveInvasora extends Nave{
 	}
 	public void setX(Integer x) {
 		this.x = x;
+	}
+	
+	public void avanzar() {
+		y+=6;
 	}
 }
