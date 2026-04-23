@@ -7,7 +7,7 @@ Si eres desarrollador y deseas ver el código o modificar el juego utilizando **
 3. Ve a la barra de menú superior y selecciona `File` > `Import...`.
 4. En la ventana que se abre, despliega la carpeta `General`, selecciona **`Existing Projects into Workspace`** y haz clic en `Next`.
 5. En la opción `Select root directory`, pulsa `Browse...` para buscar y seleccionar la carpeta donde descargaste el juego. Asegúrate de que el proyecto aparezca marcado con una tilde en la lista de abajo y dale a `Finish`.
-6. En el panel lateral (*Package Explorer* o *Project Explorer*), despliega las carpetas del proyecto hasta encontrar el archivo principal (el que contiene el método de arranque o `main`).
+6. En el panel lateral (*Package Explorer* o *Project Explorer*), despliega las carpetas del proyecto hasta encontrar el archivo principal (el que contiene el método de arranque o `main` el cual esta en `juego` > `Juego`).
 7. Haz clic derecho sobre ese archivo, selecciona **`Run As`** > **`Java Application`** (o `Local C/C++ Application`, dependiendo del lenguaje en el que tengan configurado el entorno) para compilar e iniciar el juego.
 
 link del manual de usuario: https://docs.google.com/document/d/1YiwUIw-P0S8g2E1FK6TJ1EKqSzR1N8YzLgKJDr8ZvW0/edit?usp=sharing
